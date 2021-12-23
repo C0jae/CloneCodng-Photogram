@@ -2,6 +2,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
+<!--	pom.xml에 security tag library 추가 후 taglib prefix
+	header.jsp는 모든 화면 상단에 위치하는 파일
+	이 파일에 세션정보를 principal로 불러와서 저장을 하면 컨트롤러에서 하나하나 Model을 사용해서
+	넘기지 않아도 세션정보를 사용할 수 있다.
+	세션에 username 불러오기 => ${principal.user.username}
+-->
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="principal"/>
+</sec:authorize>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,18 +42,18 @@
 	
 	<header class="header">
 		<div class="container">
-			<a href="/image/story" class="logo">
+			<a href="/" class="logo">
 				<img src="/images/logo.jpg" alt="">
 			</a>
 			<nav class="navi">
 				<ul class="navi-list">
-					<li class="navi-item"><a href="/image/story">
+					<li class="navi-item"><a href="/">
 							<i class="fas fa-home"></i>
 						</a></li>
 					<li class="navi-item"><a href="/image/popular">
 							<i class="far fa-compass"></i>
 						</a></li>
-					<li class="navi-item"><a href="/user/profile">
+					<li class="navi-item"><a href="/user/1">
 							<i class="far fa-user"></i>
 						</a></li>
 				</ul>

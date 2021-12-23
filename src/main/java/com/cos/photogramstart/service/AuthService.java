@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-@Service    // 1. ioC   2. 트랜잭션 관리
+@Service    // 1. IoC   2. 트랜잭션 관리
 public class AuthService {
 
     // user 테이블 JapRepository 인스턴스
