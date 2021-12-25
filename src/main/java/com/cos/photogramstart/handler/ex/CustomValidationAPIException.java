@@ -7,6 +7,10 @@ public class CustomValidationAPIException extends RuntimeException {
 
     private Map<String, String> errorMap;
 
+    public CustomValidationAPIException(String message) {
+        super(message);
+    }
+
     public CustomValidationAPIException(String message, Map<String, String> errorMap) {
         super(message);
         this.errorMap = errorMap;
