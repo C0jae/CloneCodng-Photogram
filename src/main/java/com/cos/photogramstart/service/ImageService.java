@@ -12,6 +12,7 @@ import com.cos.photogramstart.web.dto.image.ImageUploadDto;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,6 +25,9 @@ public class ImageService {
     @Value("${file.path}")
     private String uploadFolder;
 
+    // DB에 변화를 주게된다면 꼭 @Transactional 해야한다.
+    //  ㄴ 2개 이상의 DB변화가 있을 경우 중간에 문제가 생겨버려 해당지점까지만 변경되면 큰 문제기 때문(ex) 계좌송금 중 문제 발생)
+    @Transactional
     public void imageUpload(ImageUploadDto imageUploadDto, PrincipalDetails principalDetails) {
         UUID uuid = UUID.randomUUID(); // uuid : 유일한 이름을 부여
         String imageFileName = uuid + "_" + imageUploadDto.getFile().getOriginalFilename();
@@ -40,8 +44,11 @@ public class ImageService {
 
         // image 테이블에 저장
         Image image = imageUploadDto.toEntity(imageFileName, principalDetails.getUser());
-        Image imageEntity = imageRepository.save(image);
+        imageRepository.save(image);
+        // Image imageEntity = imageRepository.save(image);
 
-        System.out.println(imageEntity);
+        // 오류발생 : imageEntity에 user가 있고 user에는 image가 있기 때문에 계속 무한참조 발생
+        // -> 해결방안 48강 확인
+        // System.out.println(imageEntity);
     }
 }

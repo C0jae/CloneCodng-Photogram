@@ -52,6 +52,7 @@ public class User {
     // User를 Select할 때 해당 User에 해당하는 image들은 전부 가져온다.
     // Lazy => User를 Select할 때 해당 User에 해당하는 image들을 전부 가져오지 않는다. -> 대신 getImages() 함수의 image들이 호출될 때 가져온다.
     // Eager => User를 Select할 때 해당 User에 해당하는 image들을 전부 Join해서 가져온다.
+    // @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Image> images; // 양방향 매핑
 

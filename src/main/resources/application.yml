@@ -19,7 +19,7 @@ spring:
     password: 1234
     
   jpa:
-    open-in-view: true
+    open-in-view: true # true false -> view까지 session을 유지하는지 여부 결정 강의 48강
     hibernate:
       ddl-auto: update # create, update, none
       naming:
