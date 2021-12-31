@@ -43,9 +43,9 @@ public class UserApiController {
                 for (FieldError error : bindingResult.getFieldErrors()) {
                     errorMap.put(error.getField(), error.getDefaultMessage());
     
-                    System.out.println("=====================");
-                    System.out.println(error.getDefaultMessage());
-                    System.out.println("=====================");
+                    // System.out.println("=====================");
+                    // System.out.println(error.getDefaultMessage());
+                    // System.out.println("=====================");
                 }
                     throw new CustomValidationAPIException("유효성 검사 실패", errorMap);
             
