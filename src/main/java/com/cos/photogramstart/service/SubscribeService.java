@@ -19,8 +19,8 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class SubscribeService {
 
-    public final SubscribeRepository subscribeRepository;
-    public final EntityManager em; // Repository는 EntityManager를 구현해서 만들어져 있는 구현체이다.
+    private final SubscribeRepository subscribeRepository;
+    private final EntityManager em; // Repository는 EntityManager를 구현해서 만들어져 있는 구현체이다.
 
     @Transactional(readOnly = true)
     public List<SubscribeDto> subscribeList(int principalId, int pageUserId) {
@@ -28,7 +28,7 @@ public class SubscribeService {
         // 쿼리 준비
         StringBuffer sb = new StringBuffer();
         sb.append("SELECT u.id, u.username, u.profileImgUrl, ");
-        sb.append("if ((SELECT 1 FROM subscribe WHERE fromUserId = ? AND toUserId = u.id), 1, 0) subscribeState, ");
+        sb.append("if ((SELECT 1 FROM subscribe WHERE fromUserId = ? and toUserId = u.id), 1, 0) subscribeState, ");
         sb.append("if ((? = u.id), 1, 0) equalUserState ");
         sb.append("FROM user u INNER JOIN subscribe s ");
         sb.append("ON u.id = s.toUserId ");

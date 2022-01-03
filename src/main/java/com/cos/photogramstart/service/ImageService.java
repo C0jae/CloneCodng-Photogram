@@ -3,6 +3,7 @@ package com.cos.photogramstart.service;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.UUID;
 
 import com.cos.photogramstart.config.auth.PrincipalDetails;
@@ -21,6 +22,13 @@ import lombok.RequiredArgsConstructor;
 public class ImageService {
     
     private final ImageRepository imageRepository;
+
+    @Transactional(readOnly = true)
+    public List<Image> imageStory(int principalId) {
+        List<Image> images = imageRepository.mStory(principalId);
+        
+        return images;
+    }
 
     @Value("${file.path}")
     private String uploadFolder;
