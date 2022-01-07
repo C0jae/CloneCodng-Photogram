@@ -12,6 +12,8 @@ import com.cos.photogramstart.domain.image.ImageRepository;
 import com.cos.photogramstart.web.dto.image.ImageUploadDto;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,8 +26,8 @@ public class ImageService {
     private final ImageRepository imageRepository;
 
     @Transactional(readOnly = true)
-    public List<Image> imageStory(int principalId) {
-        List<Image> images = imageRepository.mStory(principalId);
+    public Page<Image> imageStory(int principalId, Pageable pageable) {
+        Page<Image> images = imageRepository.mStory(principalId, pageable);
         
         return images;
     }
