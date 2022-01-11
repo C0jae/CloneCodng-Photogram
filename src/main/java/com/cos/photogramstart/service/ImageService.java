@@ -25,10 +25,23 @@ public class ImageService {
     
     private final ImageRepository imageRepository;
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true) // 영속성 컨텍스트 변경 감지를 해서, 터티체킹, flush(반영) X
     public Page<Image> imageStory(int principalId, Pageable pageable) {
         Page<Image> images = imageRepository.mStory(principalId, pageable);
         
+        // 2(cos) 로그인
+        // images에 좋아요 상태 담기
+        images.forEach((image) -> {
+            
+            image.getLikes().forEach((like) -> {
+                // 해당 이미지에 좋아요한 사람들을 찾아서 현재 로그인한 사람이 좋아요 한 것인지 비교
+                if (like.getUser().getId() == principalId) {
+                    image.setLikeState(true);
+                }
+            });
+
+        });
+
         return images;
     }
 
