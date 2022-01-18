@@ -3,7 +3,6 @@ package com.cos.photogramstart.service;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.UUID;
 
 import com.cos.photogramstart.config.auth.PrincipalDetails;
@@ -33,6 +32,8 @@ public class ImageService {
         // images에 좋아요 상태 담기
         images.forEach((image) -> {
             
+            image.setLikeCount(image.getLikes().size());
+
             image.getLikes().forEach((like) -> {
                 // 해당 이미지에 좋아요한 사람들을 찾아서 현재 로그인한 사람이 좋아요 한 것인지 비교
                 if (like.getUser().getId() == principalId) {
