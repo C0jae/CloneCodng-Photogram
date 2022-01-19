@@ -41,7 +41,7 @@ public class User {
     private String website;         // 웹사이트
     private String bio;  
     
-    @Column(nullable = false)// 자기소개
+    @Column(nullable = false)       // 자기소개
     private String email;
     private String phone;
     private String gender;
