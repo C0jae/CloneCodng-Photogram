@@ -61,7 +61,7 @@ public class ImageService {
     public void imageUpload(ImageUploadDto imageUploadDto, PrincipalDetails principalDetails) {
         UUID uuid = UUID.randomUUID(); // uuid : 유일한 이름을 부여
         String imageFileName = uuid + "_" + imageUploadDto.getFile().getOriginalFilename();
-        System.out.println("이미지 파일이름 : " + imageFileName);
+        // System.out.println("이미지 파일이름 : " + imageFileName);
 
         Path imageFilePath = Paths.get(uploadFolder + imageFileName);
 

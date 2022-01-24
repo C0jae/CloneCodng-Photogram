@@ -56,14 +56,15 @@ public class AuthController {
         
         } else {
             // log.info(signupDto.toString());
-            System.out.println("signupDto : " + signupDto.toString());
+            // System.out.println("signupDto : " + signupDto.toString());
 
             // User <- SignupDto
             User user = signupDto.toEntity();
-            System.out.println("user : " + user.toString());
+            // System.out.println("user : " + user.toString());
 
-            User userEntity = authService.signup(user);
-            System.out.println("userEntity : " + userEntity);
+            authService.signup(user);
+            // User userEntity = authService.signup(user);
+            // System.out.println("userEntity : " + userEntity);
 
             return "auth/signin";
         }
